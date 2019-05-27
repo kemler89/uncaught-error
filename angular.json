@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {},
       "architect": {
-        "build": {
+        "build-app": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/uncaught-error",
@@ -50,11 +50,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "uncaught-error:build"
+            "browserTarget": "uncaught-error:build-app"
           },
           "configurations": {
             "production": {
-              "browserTarget": "uncaught-error:build:production"
+              "browserTarget": "uncaught-error:build-app:production"
             }
           }
         },
@@ -91,6 +91,27 @@
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/uncaught-error-server",
+            "main": "src/main.server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          }
+        },
+        "build": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "browserTarget": "uncaught-error:build-app",
+            "serverTarget": "uncaught-error:server",
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "uncaught-error:build-app:production"
+            }
           }
         }
       }
